@@ -4,10 +4,11 @@ import xml.etree.ElementTree
 
 class CloudCamClient():
 
-  def __init__(self, host, username, password):
+  def __init__(self, host, username, password, move_speed):
     self.host = host
     self.username = username
     self.password = password
+    self.move_speed = move_speed
 
   def send_ptz_request(self, ptz_xml):
     opener = urllib2.build_opener(urllib2.HTTPHandler)
@@ -32,22 +33,22 @@ class CloudCamClient():
     self.send_ptz_request("<pan>%s</pan>" % speed)
 
   def zoom_in(self):
-    self.send_zoom_request(2)
+    self.send_zoom_request(self.move_speed)
 
   def zoom_out(self):
-    self.send_zoom_request(-2)
+    self.send_zoom_request(-self.move_speed)
 
   def tilt_up(self):
-    self.send_tilt_request(2)
+    self.send_tilt_request(-self.move_speed)
 
   def tilt_down(self):
-    self.send_tilt_request(-2)
+    self.send_tilt_request(self.move_speed)
 
   def pan_left(self):
-    self.send_pan_request(2)
+    self.send_pan_request(self.move_speed)
 
   def pan_right(self):
-    self.send_pan_request(-2)
+    self.send_pan_request(-self.move_speed)
 
   def freeze(self):
     self.send_ptz_request("<pan>0</pan><tilt>0</tilt><zoom>0</zoom>")

@@ -12,7 +12,8 @@ for k, v in APP_CONF.iteritems():
 client = CloudCamClient(
   app.config["CLOUD_CAM_HOST"],
   app.config["CLOUD_CAM_USER"],
-  app.config["CLOUD_CAM_PASS"]
+  app.config["CLOUD_CAM_PASS"],
+  app.config["MOVE_SPEED"]
 )
 
 from app import views
